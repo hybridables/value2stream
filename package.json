@@ -25,7 +25,28 @@
     "index.js"
   ],
   "keywords": [
-    "value2stream"
+    "any",
+    "anything",
+    "buffer",
+    "convert",
+    "create",
+    "create-stream",
+    "errors",
+    "everything",
+    "handle",
+    "make",
+    "number",
+    "promise",
+    "str",
+    "stream",
+    "string",
+    "to",
+    "to-stream",
+    "transform",
+    "val",
+    "value",
+    "value-stream",
+    "value-to-stream"
   ],
   "verb": {
     "reflinks": [
