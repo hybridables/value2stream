@@ -28,19 +28,30 @@
     "value2stream"
   ],
   "verb": {
+    "reflinks": [
+      "callback2stream",
+      "promise2stream",
+      "through2"
+    ],
     "run": true,
     "toc": false,
     "layout": "empty",
-    "tasks": [
-      "readme"
-    ],
     "lint": {
       "reflinks": true
     },
-    "reflinks": [
-      "promise2stream",
-      "through2",
-      "callback2stream"
-    ]
+    "tasks": [
+      "readme"
+    ],
+    "related": {
+      "list": [
+        "promise2stream",
+        "callback2stream",
+        "promise2thunk",
+        "thunk2promise",
+        "relike",
+        "native-promise",
+        "to-stream"
+      ]
+    }
   }
 }

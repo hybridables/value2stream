@@ -72,6 +72,15 @@ toStream(rejected).once('error', function (err) {
 })
 ```
 
+## Related
+* [callback2stream](https://www.npmjs.com/package/callback2stream): Transform sync, async or generator function to Stream. Correctly handle… [more](https://www.npmjs.com/package/callback2stream) | [homepage](https://github.com/hybridables/callback2stream)
+* [native-promise](https://www.npmjs.com/package/native-promise): Get native `Promise` or falsey value if not available. | [homepage](https://github.com/tunnckocore/native-promise)
+* [to-stream](https://www.npmjs.com/package/to-stream): Turn an array to a Node.js stream | [homepage](https://github.com/poying/node-to-stream)
+* [promise2stream](https://www.npmjs.com/package/promise2stream): Transform ES2015 Promise to Stream - specifically, Transform Stream using… [more](https://www.npmjs.com/package/promise2stream) | [homepage](https://github.com/hybridables/promise2stream)
+* [promise2thunk](https://www.npmjs.com/package/promise2thunk): Convert (transform) promise to thunk, just like was in co@3 | [homepage](https://github.com/tunnckocore/promise2thunk)
+* [relike](https://www.npmjs.com/package/relike): Simple promisify a callback-style function with sane defaults. Support promisify-ing… [more](https://www.npmjs.com/package/relike) | [homepage](https://github.com/hybridables/relike)
+* [thunk2promise](https://www.npmjs.com/package/thunk2promise): Transform or convert thunk to Bluebird Promise. | [homepage](https://github.com/tunnckocore/thunk2promise)
+
 ## Contributing
 Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/hybridables/value2stream/issues/new).  
 But before doing anything, please read the [CONTRIBUTING.md](./CONTRIBUTING.md) guidelines.
