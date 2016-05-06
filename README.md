@@ -18,16 +18,50 @@ npm i value2stream --save
 const value2stream = require('value2stream')
 ```
 
-### [value2stream](index.js#L24)
-
+### [value2stream](index.js#L59)
 > Create a stream from any value.
 
 **Params**
 
-* `val` **{Mixed}**    
-* `[opts]` **{Object|Function=}**: Directly passed to [promise2stream][], otherwise Promise contstructor.    
+* `val` **{Mixed}**: Any type of value except function. You [callback2stream][] for functions.    
+* `[opts]` **{Object|Function=}**: Directly passed to [promise2stream][] and [through2][], otherwise Promise contstructor.    
 * `[Promize]` **{Function}**: Promise constructor to be used when no support for native Promise.    
 * `returns` **{Stream}**  
+
+**Example**
+
+```js
+var toStream = require('value2promise')
+
+toStream(123).on('data', function (val) {
+  console.log(val) // => 123
+})
+toStream('str foo').on('data', function (val) {
+  console.log(val) // => 'str foo'
+})
+
+// throws on non-object mode (default)
+toStream({ foo: 'bar' }).once('error', function (err) {
+  console.log(err instanceof Error) // => Error: invalid non-string/chunk
+})
+
+// not throws if pass `opts.objectMode: true`
+toStream({ foo: 'bar' }, { objectMode: true })
+  .on('data', function (val) {
+    console.log(val) // => { foo: 'bar' }
+  })
+
+var promise = Promise.resolve('foo bar')
+toStream(promise).on('data', function (val) {
+  console.log(val) // => 'foo bar'
+})
+
+var rejected = Promise.reject(new Error('err msg'))
+toStream(rejected).once('error', function (err) {
+  console.log(err instanceof Error) // => true
+  console.log(err.message) // => 'err msg'
+})
+```
 
 ## Contributing
 Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/hybridables/value2stream/issues/new).  
@@ -37,7 +71,9 @@ But before doing anything, please read the [CONTRIBUTING.md](./CONTRIBUTING.md) 
 
 [![tunnckoCore.tk][author-www-img]][author-www-url] [![keybase tunnckoCore][keybase-img]][keybase-url] [![tunnckoCore npm][author-npm-img]][author-npm-url] [![tunnckoCore twitter][author-twitter-img]][author-twitter-url] [![tunnckoCore github][author-github-img]][author-github-url]
 
+[callback2stream]: https://github.com/hybridables/callback2stream
 [promise2stream]: https://github.com/hybridables/promise2stream
+[through2]: https://github.com/rvagg/through2
 
 [npmjs-url]: https://www.npmjs.com/package/value2stream
 [npmjs-img]: https://img.shields.io/npm/v/value2stream.svg?label=value2stream

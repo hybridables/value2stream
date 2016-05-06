@@ -38,7 +38,9 @@
       "reflinks": true
     },
     "reflinks": [
-      "promise2stream"
+      "promise2stream",
+      "through2",
+      "callback2stream"
     ]
   }
 }

@@ -14,8 +14,43 @@ var promise2stream = require('promise2stream')
 /**
  * > Create a stream from any value.
  *
- * @param  {Mixed} `val`
- * @param  {Object|Function=} `[opts]` Directly passed to [promise2stream][], otherwise Promise contstructor.
+ * **Example**
+ *
+ * ```js
+ * var toStream = require('value2promise')
+ *
+ * toStream(123).on('data', function (val) {
+ *   console.log(val) // => 123
+ * })
+ * toStream('str foo').on('data', function (val) {
+ *   console.log(val) // => 'str foo'
+ * })
+ *
+ * // throws on non-object mode (default)
+ * toStream({ foo: 'bar' }).once('error', function (err) {
+ *   console.log(err instanceof Error) // => Error: invalid non-string/chunk
+ * })
+ *
+ * // not throws if pass `opts.objectMode: true`
+ * toStream({ foo: 'bar' }, { objectMode: true })
+ *   .on('data', function (val) {
+ *     console.log(val) // => { foo: 'bar' }
+ *   })
+ *
+ * var promise = Promise.resolve('foo bar')
+ * toStream(promise).on('data', function (val) {
+ *   console.log(val) // => 'foo bar'
+ * })
+ *
+ * var rejected = Promise.reject(new Error('err msg'))
+ * toStream(rejected).once('error', function (err) {
+ *   console.log(err instanceof Error) // => true
+ *   console.log(err.message) // => 'err msg'
+ * })
+ * ```
+ *
+ * @param  {Mixed} `val` Any type of value except function. Use [callback2stream][] for functions.
+ * @param  {Object|Function=} `[opts]` Directly passed to [promise2stream][] and [through2][], otherwise Promise contstructor.
  * @param  {Function} `[Promize]` Promise constructor to be used when no support for native Promise.
  * @return {Stream}
  * @api public
