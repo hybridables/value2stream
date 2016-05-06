@@ -88,19 +88,22 @@ test('should allow custom promise constructor to be used when no native promise'
     .once('end', done)
 })
 
-test('should fire `error` event on `opts.objectMode: false` (default) and object value', function (done) {
-  value2stream({ a: 'b' }).once('error', function (err) {
-    test.ifError(!err)
-    test.strictEqual(err instanceof Error, true)
-    done()
-  })
-})
-
-test('should fire `data` event on `opts.objectMode: true` and object value', function (done) {
-  value2stream({ a: 'b' }, { objectMode: true })
+test('should fire `data` event on `opts.objectMode: true` (default) and object value', function (done) {
+  var stream = value2stream({ a: 'b' })
+  stream
     .on('data', function (val) {
       test.deepEqual(val, { a: 'b' })
     })
     .once('error', done)
     .once('end', done)
+})
+
+test('should fire `error` event on `opts.objectMode: false` and object value', function (done) {
+  var stream = value2stream({ a: 'b' }, { objectMode: false })
+  stream.once('error', function (err) {
+    test.ifError(!err)
+    test.strictEqual(err instanceof Error, true)
+    test.strictEqual(/Invalid non-string\/buffer chunk/.test(err.message), true)
+    done()
+  })
 })
