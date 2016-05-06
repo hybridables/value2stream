@@ -18,12 +18,12 @@ npm i value2stream --save
 const value2stream = require('value2stream')
 ```
 
-### [value2stream](index.js#L59)
+### [value2stream](index.js#L68)
 > Create a stream from any value.
 
 **Params**
 
-* `val` **{Mixed}**: Any type of value except function. You [callback2stream][] for functions.    
+* `val` **{Mixed}**: Any type of value except function. Use [callback2stream][] for functions.    
 * `[opts]` **{Object|Function=}**: Directly passed to [promise2stream][] and [through2][], otherwise Promise contstructor.    
 * `[Promize]` **{Function}**: Promise constructor to be used when no support for native Promise.    
 * `returns` **{Stream}**  
@@ -40,15 +40,24 @@ toStream('str foo').on('data', function (val) {
   console.log(val) // => 'str foo'
 })
 
-// throws on non-object mode (default)
-toStream({ foo: 'bar' }).once('error', function (err) {
-  console.log(err instanceof Error) // => Error: invalid non-string/chunk
+// not throws if `opts.objectMode: true` (default)
+toStream({ foo: 'bar' }).on('data', function (val) {
+  console.log(val) // => { foo: 'bar' }
 })
 
-// not throws if pass `opts.objectMode: true`
-toStream({ foo: 'bar' }, { objectMode: true })
-  .on('data', function (val) {
-    console.log(val) // => { foo: 'bar' }
+// throws when non-object mode
+toStream({ foo: 'bar' }, { objectMode: false })
+  .once('error', function (err) {
+    console.log(err instanceof Error) // => true
+    console.log(err) // => [Error: Invalid non-string/buffer chunk]
+  })
+
+// same applies if non-object and promise resolves object
+var fails = Promise.resolve({ a: 'b' })
+toStream(fails, { objectMode: false })
+  .once('error', function (err) {
+    console.log(err instanceof Error) // => true
+    console.log(err) // => [Error: Invalid non-string/buffer chunk]
   })
 
 var promise = Promise.resolve('foo bar')

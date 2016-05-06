@@ -26,15 +26,24 @@ var promise2stream = require('promise2stream')
  *   console.log(val) // => 'str foo'
  * })
  *
- * // throws on non-object mode (default)
- * toStream({ foo: 'bar' }).once('error', function (err) {
- *   console.log(err instanceof Error) // => Error: invalid non-string/chunk
+ * // not throws if `opts.objectMode: true` (default)
+ * toStream({ foo: 'bar' }).on('data', function (val) {
+ *   console.log(val) // => { foo: 'bar' }
  * })
  *
- * // not throws if pass `opts.objectMode: true`
- * toStream({ foo: 'bar' }, { objectMode: true })
- *   .on('data', function (val) {
- *     console.log(val) // => { foo: 'bar' }
+ * // throws when non-object mode
+ * toStream({ foo: 'bar' }, { objectMode: false })
+ *   .once('error', function (err) {
+ *     console.log(err instanceof Error) // => true
+ *     console.log(err) // => [Error: Invalid non-string/buffer chunk]
+ *   })
+ *
+ * // same applies if non-object and promise resolves object
+ * var fails = Promise.resolve({ a: 'b' })
+ * toStream(fails, { objectMode: false })
+ *   .once('error', function (err) {
+ *     console.log(err instanceof Error) // => true
+ *     console.log(err) // => [Error: Invalid non-string/buffer chunk]
  *   })
  *
  * var promise = Promise.resolve('foo bar')
