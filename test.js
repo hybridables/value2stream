@@ -107,3 +107,13 @@ test('should fire `error` event on `opts.objectMode: false` and object value', f
     done()
   })
 })
+
+test('should fire `error` event if non-object mode and promise resolves object', function (done) {
+  var promise = Promize.resolve({ xxx: 'qux' })
+  value2stream(promise, { objectMode: false })
+    .once('error', function (err) {
+      test.ifError(!err)
+      test.ok(err.message.indexOf('non-string/buffer chunk'))
+      done()
+    })
+})
