@@ -1,8 +1,10 @@
 # [value2stream][author-www-url] [![npmjs.com][npmjs-img]][npmjs-url] [![The MIT License][license-img]][license-url] [![npm downloads][downloads-img]][downloads-url] 
 
-> Transform any value to stream. Create stream from any value - string, array, buffer, number, promise.
+> Transform any value to stream. Create stream from any value - string, array, buffer, number, promise or even Error object.
 
 [![code climate][codeclimate-img]][codeclimate-url] [![standard code style][standard-img]][standard-url] [![travis build status][travis-img]][travis-url] [![coverage status][coveralls-img]][coveralls-url] [![dependency status][david-img]][david-url]
+
+**Note:** Be aware of that if you pass `Error` object you will still recieve it as value. It won't fire the `error` event on created stream. That will only happen if you pass rejected promise. And all this is intentional - you just pass a value and recieve a stream with that value.
 
 ## Install
 ```
