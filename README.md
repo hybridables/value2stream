@@ -1,6 +1,6 @@
 # [value2stream][author-www-url] [![npmjs.com][npmjs-img]][npmjs-url] [![The MIT License][license-img]][license-url] [![npm downloads][downloads-img]][downloads-url] 
 
-> Transform any value to stream. Create stream from any value - string, array, buffer, number, promise or even Error object.
+> Transform any value to stream. Create a stream from any value - string, array, buffer, number, promise or even Error object.
 
 [![code climate][codeclimate-img]][codeclimate-url] [![standard code style][standard-img]][standard-url] [![travis build status][travis-img]][travis-url] [![coverage status][coveralls-img]][coveralls-url] [![dependency status][david-img]][david-url]
 
@@ -18,6 +18,17 @@ npm i value2stream --save
 const value2stream = require('value2stream')
 ```
 
+### [value2stream](index.js#L24)
+
+> Create a stream from any value.
+
+**Params**
+
+* `val` **{Mixed}**    
+* `[opts]` **{Object|Function=}**: Directly passed to [promise2stream][], otherwise Promise contstructor.    
+* `[Promize]` **{Function}**: Promise constructor to be used when no support for native Promise.    
+* `returns` **{Stream}**  
+
 ## Contributing
 Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/hybridables/value2stream/issues/new).  
 But before doing anything, please read the [CONTRIBUTING.md](./CONTRIBUTING.md) guidelines.
@@ -25,6 +36,8 @@ But before doing anything, please read the [CONTRIBUTING.md](./CONTRIBUTING.md) 
 ## [Charlike Make Reagent](http://j.mp/1stW47C) [![new message to charlike][new-message-img]][new-message-url] [![freenode #charlike][freenode-img]][freenode-url]
 
 [![tunnckoCore.tk][author-www-img]][author-www-url] [![keybase tunnckoCore][keybase-img]][keybase-url] [![tunnckoCore npm][author-npm-img]][author-npm-url] [![tunnckoCore twitter][author-twitter-img]][author-twitter-url] [![tunnckoCore github][author-github-img]][author-github-url]
+
+[promise2stream]: https://github.com/hybridables/promise2stream
 
 [npmjs-url]: https://www.npmjs.com/package/value2stream
 [npmjs-img]: https://img.shields.io/npm/v/value2stream.svg?label=value2stream

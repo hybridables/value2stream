@@ -1,7 +1,7 @@
 {
   "name": "value2stream",
   "version": "0.1.0",
-  "description": "Transform any value to stream. Create stream from any value - string, array, buffer, number, promise or even Error object.",
+  "description": "Transform any value to stream. Create a stream from any value - string, array, buffer, number, promise or even Error object.",
   "repository": "hybridables/value2stream",
   "author": "Charlike Mike Reagent <@tunnckoCore> (http://www.tunnckocore.tk)",
   "precommit.silent": true,
@@ -36,6 +36,9 @@
     ],
     "lint": {
       "reflinks": true
-    }
+    },
+    "reflinks": [
+      "promise2stream"
+    ]
   }
 }
